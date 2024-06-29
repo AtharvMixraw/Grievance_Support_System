@@ -10,6 +10,7 @@ class ChatbotWindow(QDialog):
     def init_ui(self):
         self.setWindowTitle("AI Chatbot")
         self.setGeometry(100, 100, 400, 300)
+        self.setStyleSheet("background-color: #E6B9A6;")
         
         layout = QVBoxLayout()
         

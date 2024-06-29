@@ -24,6 +24,7 @@ class RegisterWindow(QWidget):
         self.password_input.setEchoMode(QLineEdit.Password)
         self.register_button = QPushButton("Register", self)
         self.register_button.clicked.connect(self.register)
+        self.setStyleSheet("background-color: #FDFFD2;")
 
         layout.addWidget(QLabel("Register"))
         layout.addWidget(self.username_input)
