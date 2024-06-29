@@ -1,12 +1,12 @@
+# main.py
 import sys
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QAction, QMessageBox,
     QLabel, QVBoxLayout, QWidget, QPushButton
 )
-from PyQt5.QtGui import QPixmap, QPalette, QColor
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
-# Assuming you have these imports for your specific windows
 from auth.login import LoginWindow
 from auth.register import RegisterWindow
 from grievances.submit import SubmitGrievanceWindow
@@ -23,6 +23,7 @@ class MainApp(QMainWindow):
     def init_ui(self):
         self.setWindowTitle("Organizational Grievance Support System")
         self.setGeometry(100, 100, 1440, 900)  # Set the window size to match the MacBook Air 2017 screen
+        self.setStyleSheet("background-color: #0F67B1;")
 
         # Create central widget and layout
         central_widget = QWidget()
@@ -30,7 +31,7 @@ class MainApp(QMainWindow):
 
         # Project name
         project_name = QLabel("Grievance Management System")
-        project_name.setStyleSheet("font-size: 50px; font-weight: bold; color: #7776B3;")
+        project_name.setStyleSheet("font-size: 50px; font-weight: bold; color: #FAFFAF;")
         project_name.setAlignment(Qt.AlignCenter)
 
         # Set background image
@@ -41,26 +42,26 @@ class MainApp(QMainWindow):
 
         # Heading for AI Chatbot
         chatbot_heading = QLabel("Facing problem using our platform? Try this bot!")
-        chatbot_heading.setStyleSheet("font-size: 25px; font-weight: bold; color: #9B86BD;")
+        chatbot_heading.setStyleSheet("font-size: 25px; font-weight: bold; color: #FAFFAF;")
         chatbot_heading.setAlignment(Qt.AlignCenter)
 
         # Instructions on what questions to ask
         chatbot_instructions = QLabel(
             "You can ask the bot questions like:\n"
-            "- How do I login?\n"
-            "- How do I register?\n"
-            "- How do I submit a grievance?\n"
-            "- How do I track my grievances?\n"
-            "- How do I use the admin dashboard?\n"
+            "- how do i login?\n"
+            "- how do i register?\n"
+            "- how do i submit a grievance?\n"
+            "- how do i track my grievances?\n"
+            "- how do i use the admin dashboard?\n"
             "\n"
             "NOTE: ASK THE QUESTIONS GIVEN IN ABOVE FORMAT ONLY !!"
         )
-        chatbot_instructions.setStyleSheet("font-size: 20px; color: #2F4F4F;")
+        chatbot_instructions.setStyleSheet("font-size: 20px; color: #FAFFAF;")
         chatbot_instructions.setAlignment(Qt.AlignCenter)
 
         # Chatbot button
         chatbot_button = QPushButton("AI Chatbot", self)
-        chatbot_button.setStyleSheet("font-size: 16px; background-color: #4682B4; color: #FFFFFF;")
+        chatbot_button.setStyleSheet("font-size: 16px; background-color: #EEEDEB; color: #2F3645;")
         chatbot_button.clicked.connect(self.show_chatbot)
 
         # Add widgets to layout

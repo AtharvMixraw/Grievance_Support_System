@@ -1,7 +1,7 @@
 # admin/dashboard.py
 import sys
 from tkinter import messagebox
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QComboBox
 from sqlalchemy.orm import sessionmaker
 from database.models import engine, Grievance
 
@@ -18,9 +18,16 @@ class AdminDashboard(QWidget):
         layout = QVBoxLayout()
 
         self.grievance_list = QListWidget()
+
+        self.filter_by_recipient = QComboBox(self)
+        self.filter_by_recipient.addItems(["All", "HR", "Manager", "IT Support"])  # Add more roles as needed
+        self.filter_by_recipient.currentIndexChanged.connect(self.load_grievances)
+
         self.resolve_button = QPushButton("Resolve Selected Grievance")
         self.resolve_button.clicked.connect(self.resolve_grievance)
 
+        layout.addWidget(QLabel("Filter by Recipient"))
+        layout.addWidget(self.filter_by_recipient)
         layout.addWidget(self.grievance_list)
         layout.addWidget(self.resolve_button)
 
@@ -29,10 +36,15 @@ class AdminDashboard(QWidget):
         self.load_grievances()
 
     def load_grievances(self):
-        grievances = session.query(Grievance).filter_by(status="Pending").all()
+        recipient = self.filter_by_recipient.currentText()
+        if recipient == "All":
+            grievances = session.query(Grievance).filter_by(status="Pending").all()
+        else:
+            grievances = session.query(Grievance).filter_by(status="Pending", recipient=recipient).all()
 
+        self.grievance_list.clear()
         for grievance in grievances:
-            self.grievance_list.addItem(f"ID: {grievance.id}, User ID: {grievance.user_id}, Description: {grievance.description}")
+            self.grievance_list.addItem(f"ID: {grievance.id}, User ID: {grievance.user_id}, Description: {grievance.description}, Recipient: {grievance.recipient}")
 
     def resolve_grievance(self):
         selected_item = self.grievance_list.currentItem()

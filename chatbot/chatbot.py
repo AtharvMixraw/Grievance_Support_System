@@ -38,11 +38,11 @@ class ChatbotWindow(QDialog):
     
     def get_response(self, query):
         responses = {
-            "How do i login?": "To log in, go to the 'Auth' menu and select 'Login'. Enter your username and password, then click 'Login'.",
-            "How do i register?": "To register, go to the 'Auth' menu and select 'Register'. Fill in the required details and click 'Register'.",
-            "How do i submit a grievance?": "To submit a grievance, log in first, then go to the 'Grievances' menu and select 'Submit Grievance'. Fill in the form and submit.",
-            "How do i track my grievances?": "To track your grievances, go to the 'Grievances' menu and select 'Track Grievances'. You can view the status of your submissions there.",
-            "How do i use the admin dashboard?": "To use the admin dashboard, log in as an admin and go to the 'Admin' menu and select 'Admin Dashboard'. Here you can manage grievances."
+            "how do i login?": "To log in, go to the 'Auth' menu and select 'Login'. Enter your username and password, then click 'Login'.",
+            "how do i register?": "To register, go to the 'Auth' menu and select 'Register'. Fill in the required details and click 'Register'.",
+            "how do i submit a grievance?": "To submit a grievance, log in first, then go to the 'Grievances' menu and select 'Submit Grievance'. Fill in the form and submit.",
+            "how do i track my grievances?": "To track your grievances, go to the 'Grievances' menu and select 'Track Grievances'. You can view the status of your submissions there.",
+            "how do i use the admin dashboard?": "To use the admin dashboard, log in as an admin and go to the 'Admin' menu and select 'Admin Dashboard'. Here you can manage grievances."
         }
         return responses.get(query, "I'm sorry, I can only help with questions on how to use the system.")
 

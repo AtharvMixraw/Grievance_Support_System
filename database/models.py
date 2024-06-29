@@ -1,3 +1,4 @@
+# models.py
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Text, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
@@ -19,6 +20,7 @@ class Grievance(Base):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     description = Column(String, nullable=False)
     status = Column(String, default="Pending")
+    recipient = Column(String, nullable=False)  # New field for recipient
 
     user = relationship("User", back_populates="grievances")
 
@@ -43,7 +45,6 @@ class Message(Base):
     user = relationship('User')
 
 Thread.messages = relationship('Message', order_by=Message.id, back_populates='thread')
-
 User.grievances = relationship("Grievance", order_by=Grievance.id, back_populates="user")
 
 engine = create_engine('sqlite:///grievances.db')

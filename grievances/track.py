@@ -1,4 +1,4 @@
-# grievances/track.py
+# track.py
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget
 from sqlalchemy.orm import sessionmaker
@@ -27,7 +27,7 @@ class TrackGrievancesWindow(QWidget):
         grievances = session.query(Grievance).filter_by(user_id=1).all()  # Replace with dynamic user ID
 
         for grievance in grievances:
-            self.grievance_list.addItem(f"ID: {grievance.id}, Status: {grievance.status}, Description: {grievance.description}")
+            self.grievance_list.addItem(f"ID: {grievance.id}, Status: {grievance.status}, Description: {grievance.description}, Recipient: {grievance.recipient}")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
