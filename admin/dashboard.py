@@ -1,7 +1,5 @@
-# admin/dashboard.py
 import sys
-from tkinter import messagebox
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QComboBox
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QComboBox, QMessageBox
 from sqlalchemy.orm import sessionmaker
 from database.models import engine, Grievance
 
@@ -53,8 +51,17 @@ class AdminDashboard(QWidget):
             grievance = session.query(Grievance).filter_by(id=grievance_id).first()
             grievance.status = "Resolved"
             session.commit()
-            messagebox.information(self, "Success", "Grievance resolved successfully")
-            self.load_grievances()
+
+            # Show success message
+            QMessageBox.information(self, "Success", "Grievance resolved successfully")
+
+            # Prompt to quit or continue
+            quit_reply = QMessageBox.question(self, 'Quit Application', 'Do you want to quit the application?',
+                                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if quit_reply == QMessageBox.Yes:
+                sys.exit()  # Quit the application
+            else:
+                self.load_grievances()  # Reload grievances
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
